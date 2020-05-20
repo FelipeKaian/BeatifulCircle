@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+	<head>
+		<title>My Project</title>
+		<style>
+			canvas{
+				position: absolute;
+				top: 0px;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				margin: auto;
+			}
+
+		</style>
+	</head>
+	<body>	
+		<script>
+
+		var canvas,ctx,sh,sw,mult=2,n =200,raio = 400,r = 0;
+
+	
+		function main(){
+			
+			sh = window.innerHeight;
+			sw = window.innerWidth;
+
+			if(sw >=500){
+				sh = 1200;
+				sw = 1800;
+			}
+
+			canvas = document.createElement("canvas");
+			canvas.width = sw;
+			canvas.height = sh;
+			canvas.style.border = "1px solid #000";
+
+			ctx = canvas.getContext("2d");
+			document.body.appendChild(canvas);
+			
+			roda();
+			
+		}
+
+		function roda(){
+			setTimeout(function() {
+			
+
+			ctx.fillRect(0,0,1800,1200);
+
+			var cor = "#";
+
+			for(var i = 0;i<6;i++){
+				rand = Math.floor(16*Math.random());
+				cor += rand.toString(16);
+			}
+
+			
+	
+
+			for(var i = 0;i <= n;i++){
+				ctx.beginPath();
+
+				
+
+				ctx.arc(800,600,raio,0,i*((Math.PI*2)/n),true);
+				
+				r = ((i*mult))%n;
+
+				ctx.lineTo(800+raio*(Math.sin((r)*((Math.PI*2)/n))),600+raio*(Math.cos((r)*((Math.PI*2)/n))));
+				ctx.fillText(i,800+(raio+400)*(Math.sin((i)*((Math.PI*2)/n))),600+(raio+150)*(Math.cos((i)*((Math.PI*2)/n))));
+				ctx.strokeStyle = cor;
+				ctx.stroke();
+			}
+			mult+=0.001;
+
+			ctx.font = "20px Georgia";
+
+			roda();
+		},0);
+		}
+		
+
+		
+
+		main();
+
+		</script>
+	</body>
+<html>
